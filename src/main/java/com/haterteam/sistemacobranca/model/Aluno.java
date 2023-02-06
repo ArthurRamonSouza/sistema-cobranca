@@ -1,21 +1,42 @@
 package com.haterteam.sistemacobranca.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Aluno {
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
-    private String nome;
-    private int idade;
-    private String email;
-    private int celular;
-    private String cep;
+@Entity
+@Table(name = "alunos")
+public class Aluno implements Serializable{
+
+    private static final long serialVersionUID = 1l;
+
+    @Id
     private String cpf;
+    @Column(nullable = false, unique = true)
+    private String nome;
+    @Column(nullable = false)
+    private int idade;
+    @Column(nullable = false)
+    private String email;
+    @Column(nullable = false)
+    private int celular;
+    @Column(nullable = false, length = 8)
+    private String cep;
 
+    @Column(nullable = false)
     private Date dataPagamento;
+    @Column(nullable = false)
     private float mensalidade;
+    @Column(nullable = false)
     private Date ultimoPagamento;
 
+    @Column(nullable = false)
     private static Date dataPagamentoPadrao;
+    @Column(nullable = false)
     private static float mensalidadePadrao;
 
     public Aluno(String nome, int idade, int celular, String cep, String cpf) {
