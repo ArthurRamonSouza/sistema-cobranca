@@ -39,35 +39,6 @@ public class Aluno implements Serializable{
     @Column(nullable = false)
     private static float mensalidadePadrao;
 
-    public Aluno(String nome, int idade, int celular, String cep, String cpf) {
-        this.nome = nome;
-        this.idade = idade;
-        this.celular = celular;
-        this.cep = cep;
-        this.cpf = cpf;
-    }
-
-    public Aluno(String nome, int idade, String email, int celular, String cep, String cpf) {
-        this.nome = nome;
-        this.idade = idade;
-        this.email = email;
-        this.celular = celular;
-        this.cep = cep;
-        this.cpf = cpf;
-    }
-
-    public Aluno(String nome, int idade, String email, int celular, String cep, String cpf, Date dataPagamento,
-            float mensalidade) {
-        this.nome = nome;
-        this.idade = idade;
-        this.email = email;
-        this.celular = celular;
-        this.cep = cep;
-        this.cpf = cpf;
-        this.dataPagamento = dataPagamento;
-        this.mensalidade = mensalidade;
-    }
-
     public String getNome() {
         return nome;
     }
