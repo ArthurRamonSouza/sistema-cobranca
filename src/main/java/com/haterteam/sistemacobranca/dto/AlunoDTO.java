@@ -1,5 +1,7 @@
 package com.haterteam.sistemacobranca.dto;
 
+import java.util.Date;
+
 import io.micrometer.common.lang.Nullable;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -24,6 +26,9 @@ public class AlunoDTO {
     @NotBlank
     @Size(max = 8)
     private String cep;
+
+    @NotBlank
+    private Date dataPagamento;
 
     public String getCpf() {
         return cpf;
