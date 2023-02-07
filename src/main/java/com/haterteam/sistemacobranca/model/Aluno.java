@@ -27,16 +27,16 @@ public class Aluno implements Serializable{
     @Column(nullable = false, length = 8)
     private String cep;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Date dataPagamento;
     @Column(nullable = false)
     private float mensalidade;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Date ultimoPagamento;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private static Date dataPagamentoPadrao;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private static float mensalidadePadrao;
 
     public String getNome() {

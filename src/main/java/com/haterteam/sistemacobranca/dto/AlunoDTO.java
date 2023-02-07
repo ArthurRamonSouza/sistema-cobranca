@@ -4,6 +4,7 @@ import java.util.Date;
 
 import io.micrometer.common.lang.Nullable;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class AlunoDTO {
@@ -14,20 +15,22 @@ public class AlunoDTO {
     @NotBlank
     private String nome;
 
-    @NotBlank
+    @NotNull
     private int idade;
 
     @Nullable
     private String email;
 
-    @NotBlank
+    @NotNull
     private int celular;
 
     @NotBlank
     @Size(max = 8)
     private String cep;
 
-    @NotBlank
+    @NotNull
+    private float mensalidade;
+
     private Date dataPagamento;
 
     public String getCpf() {
