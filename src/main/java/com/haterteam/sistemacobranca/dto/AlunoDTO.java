@@ -1,5 +1,6 @@
 package com.haterteam.sistemacobranca.dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import io.micrometer.common.lang.Nullable;
@@ -11,27 +12,24 @@ public class AlunoDTO {
 
     @NotBlank
     private String cpf;
-
     @NotBlank
     private String nome;
-
     @NotNull
     private int idade;
-
     @Nullable
     private String email;
-
     @NotNull
-    private int celular;
-
+    @Size(max = 11)
+    private String celular;
     @NotBlank
     @Size(max = 8)
     private String cep;
-
     @NotNull
     private float mensalidade;
-
+    @NotNull
     private Date dataPagamento;
+    
+    private LocalDate ultimoPagamento;
 
     public String getCpf() {
         return cpf;
@@ -65,11 +63,11 @@ public class AlunoDTO {
         this.email = email;
     }
 
-    public int getCelular() {
+    public String getCelular() {
         return celular;
     }
 
-    public void setCelular(int celular) {
+    public void setCelular(String celular) {
         this.celular = celular;
     }
 
@@ -80,5 +78,31 @@ public class AlunoDTO {
     public void setCep(String cep) {
         this.cep = cep;
     }
+
+    public float getMensalidade() {
+        return mensalidade;
+    }
+
+    public void setMensalidade(float mensalidade) {
+        this.mensalidade = mensalidade;
+    }
+
+    public Date getDataPagamento() {
+        return dataPagamento;
+    }
+
+    public void setDataPagamento(Date dataPagamento) {
+        this.dataPagamento = dataPagamento;
+    }
+
+    public LocalDate getUltimoPagamento() {
+        return ultimoPagamento;
+    }
+
+    public void setUltimoPagamento(LocalDate ultimoPagamento) {
+        this.ultimoPagamento = ultimoPagamento;
+    }
+
+    
 
 }
