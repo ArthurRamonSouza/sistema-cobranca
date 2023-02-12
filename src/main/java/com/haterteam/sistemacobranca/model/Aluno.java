@@ -1,7 +1,7 @@
 package com.haterteam.sistemacobranca.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,109 +22,71 @@ public class Aluno implements Serializable{
     private int idade;
     @Column(nullable = false)
     private String email;
-    @Column(nullable = false)
-    private int celular;
+    @Column(nullable = false, length = 11)
+    private String celular;
     @Column(nullable = false, length = 8)
     private String cep;
 
-    @Column(nullable = true)
-    private Date dataPagamento;
+    @Column(nullable = false)
+    private LocalDate dataPagamento;
     @Column(nullable = false)
     private float mensalidade;
     @Column(nullable = true)
-    private Date ultimoPagamento;
-
-    @Column(nullable = true)
-    private static Date dataPagamentoPadrao;
-    @Column(nullable = true)
-    private static float mensalidadePadrao;
+    private LocalDate ultimoPagamento;
 
     public String getNome() {
         return nome;
     }
-
     public void setNome(String nome) {
         this.nome = nome;
     }
-
     public int getIdade() {
         return idade;
     }
-
     public void setIdade(int idade) {
         this.idade = idade;
     }
-
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public int getCelular() {
+    public String getCelular() {
         return celular;
     }
-
-    public void setCelular(int celular) {
+    public void setCelular(String celular) {
         this.celular = celular;
     }
-
     public String getCep() {
         return cep;
     }
-
     public void setCep(String cep) {
         this.cep = cep;
     }
-
     public String getCpf() {
         return cpf;
     }
-
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-
-    public Date getDataPagamento() {
+    public LocalDate getDataPagamento() {
         return dataPagamento;
     }
-
-    public void setDataPagamento(Date dataPagamento) {
+    public void setDataPagamento(LocalDate dataPagamento) {
         this.dataPagamento = dataPagamento;
     }
-
     public float getMensalidade() {
         return mensalidade;
-    }
-    
+    } 
     public void setMensalidade(float mensalidade) {
         this.mensalidade = mensalidade;
     }
-    
-    public Date getUltimoPagamento() {
+    public LocalDate getUltimoPagamento() {
         return ultimoPagamento;
     }
-
-    public static Date getDataPagamentoPadrao() {
-        return dataPagamentoPadrao;
-    }
-
-    public static void setDataPagamentoPadrao(Date dataPagamentoPadrao) {
-        Aluno.dataPagamentoPadrao = dataPagamentoPadrao;
-    }
-
-    public static float getMensalidadePadrao() {
-        return mensalidadePadrao;
-    }
-
-    public static void setMensalidadePadrao(float mensalidadePadrao) {
-        Aluno.mensalidadePadrao = mensalidadePadrao;
-    }
-
     public void realizarPagamento(){
-        this.ultimoPagamento = new Date();
+        this.ultimoPagamento = LocalDate.now();
     }
 
 }

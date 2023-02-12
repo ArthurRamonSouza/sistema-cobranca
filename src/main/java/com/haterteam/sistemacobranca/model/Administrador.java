@@ -1,17 +1,15 @@
 package com.haterteam.sistemacobranca.model;
 
-import java.util.Date;
-
 public class Administrador {
 
-    private String nome;
+    private String usuario;
     private String senha;
     
-    public String getNome() {
-        return nome;
+    public String getUsuario() {
+        return usuario;
     }
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
     public String getSenha() {
         return senha;
@@ -20,11 +18,4 @@ public class Administrador {
         this.senha = senha;
     }
 
-    public void setDataPagamentoPadrao(Date data){
-        Aluno.setDataPagamentoPadrao(data);
-    }
-
-    public void setMensalidadePadrao(float valor){
-        Aluno.setMensalidadePadrao(valor);
-    }
 }
