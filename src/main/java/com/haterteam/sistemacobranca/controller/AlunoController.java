@@ -36,6 +36,7 @@ public class AlunoController {
     public ResponseEntity<Object> saveAluno(@RequestBody @Valid AlunoDTO alunoDto){
         var aluno = new Aluno();
         BeanUtils.copyProperties(alunoDto, aluno);
+        aluno.setMensalidade(alunoDto.getMensalidadeStr());
         return ResponseEntity.status(HttpStatus.CREATED).body(alunoService.save(aluno));
 
     }

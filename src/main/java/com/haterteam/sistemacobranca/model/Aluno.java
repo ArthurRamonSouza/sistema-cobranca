@@ -35,7 +35,6 @@ public class Aluno implements Serializable{
     @Column(nullable = false)
     private float mensalidade;
     @Column(nullable = true)
-    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate ultimoPagamento;
 
     public String getNome() {
@@ -83,8 +82,8 @@ public class Aluno implements Serializable{
     public float getMensalidade() {
         return mensalidade;
     } 
-    public void setMensalidade(float mensalidade) {
-        this.mensalidade = mensalidade;
+    public void setMensalidade(String mensalidadeStr) {
+        this.mensalidade = Float.parseFloat(mensalidadeStr);
     }
     public LocalDate getUltimoPagamento() {
         return ultimoPagamento;

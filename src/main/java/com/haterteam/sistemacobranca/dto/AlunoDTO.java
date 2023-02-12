@@ -1,7 +1,8 @@
 package com.haterteam.sistemacobranca.dto;
 
 import java.time.LocalDate;
-import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.micrometer.common.lang.Nullable;
 import jakarta.validation.constraints.NotBlank;
@@ -18,16 +19,17 @@ public class AlunoDTO {
     private int idade;
     @Nullable
     private String email;
-    @NotNull
+    @NotBlank
     @Size(max = 11)
     private String celular;
     @NotBlank
     @Size(max = 8)
     private String cep;
+    @NotBlank
+    private String mensalidadeStr;
     @NotNull
-    private float mensalidade;
-    @NotNull
-    private Date dataPagamento;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private LocalDate dataPagamento;
     
     private LocalDate ultimoPagamento;
 
@@ -79,19 +81,19 @@ public class AlunoDTO {
         this.cep = cep;
     }
 
-    public float getMensalidade() {
-        return mensalidade;
+    public String getMensalidadeStr() {
+        return mensalidadeStr;
     }
 
-    public void setMensalidade(float mensalidade) {
-        this.mensalidade = mensalidade;
+    public void setMensalidadeStr(String mensalidadeStr) {
+        this.mensalidadeStr = mensalidadeStr;
     }
 
-    public Date getDataPagamento() {
+    public LocalDate getDataPagamento() {
         return dataPagamento;
     }
 
-    public void setDataPagamento(Date dataPagamento) {
+    public void setDataPagamento(LocalDate dataPagamento) {
         this.dataPagamento = dataPagamento;
     }
 
@@ -102,7 +104,5 @@ public class AlunoDTO {
     public void setUltimoPagamento(LocalDate ultimoPagamento) {
         this.ultimoPagamento = ultimoPagamento;
     }
-
-    
 
 }
