@@ -6,7 +6,6 @@ import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -43,7 +42,13 @@ public class Aluno implements Serializable{
     private float mensalidade;
     @Column(nullable = true)
     private LocalDate ultimoPagamento;
-
+    
+    public UUID getId() {
+        return id;
+    }
+    public void setUltimoPagamento(LocalDate ultimoPagamento) {
+        this.ultimoPagamento = ultimoPagamento;
+    }
     public String getNome() {
         return nome;
     }
@@ -89,8 +94,8 @@ public class Aluno implements Serializable{
     public float getMensalidade() {
         return mensalidade;
     } 
-    public void setMensalidade(String mensalidadeStr) {
-        this.mensalidade = Float.parseFloat(mensalidadeStr);
+    public void setMensalidade(float mensalidade) {
+        this.mensalidade = mensalidade;
     }
     public LocalDate getUltimoPagamento() {
         return ultimoPagamento;

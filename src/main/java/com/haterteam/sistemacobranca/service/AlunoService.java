@@ -1,6 +1,8 @@
 package com.haterteam.sistemacobranca.service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -33,6 +35,18 @@ public class AlunoService {
 
     public List<Aluno> findAll() {
         return alunoRepository.findAll();
+    }
+
+    public Optional<Aluno> findById(UUID id) {
+        return alunoRepository.findById(id);
+    }
+
+    public Optional<Aluno> findByCpf(String cpf) {
+        return alunoRepository.findByCpf(cpf);
+    }
+
+    public Optional<Aluno> findByNome(String nome) {
+        return alunoRepository.findByNome(nome);
     }
     
 }

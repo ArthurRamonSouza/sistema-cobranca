@@ -30,7 +30,6 @@ public class AlunoDTO {
     @NotNull
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate dataPagamento;
-    
     private LocalDate ultimoPagamento;
 
     public String getCpf() {
@@ -81,8 +80,8 @@ public class AlunoDTO {
         this.cep = cep;
     }
 
-    public String getMensalidadeStr() {
-        return mensalidadeStr;
+    public float getMensalidade() {
+        return Float.parseFloat(mensalidadeStr);
     }
 
     public void setMensalidadeStr(String mensalidadeStr) {
