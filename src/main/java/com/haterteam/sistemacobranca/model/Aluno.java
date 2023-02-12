@@ -3,6 +3,8 @@ package com.haterteam.sistemacobranca.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -28,10 +30,12 @@ public class Aluno implements Serializable{
     private String cep;
 
     @Column(nullable = false)
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate dataPagamento;
     @Column(nullable = false)
     private float mensalidade;
     @Column(nullable = true)
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate ultimoPagamento;
 
     public String getNome() {
