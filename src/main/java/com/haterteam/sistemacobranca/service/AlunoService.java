@@ -20,5 +20,13 @@ public class AlunoService {
     public Aluno save(Aluno aluno) {
         return alunoRepository.save(aluno);
     }
+
+    public boolean existsByCpf(String cpf) {
+        return alunoRepository.existsByCpf(cpf);
+    }
+
+    public boolean existsByNome(String nome) {
+        return alunoRepository.existsByNome(nome);
+    }
     
 }

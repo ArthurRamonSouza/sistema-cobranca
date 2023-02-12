@@ -2,6 +2,7 @@ package com.haterteam.sistemacobranca.controller;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,8 +33,18 @@ public class AlunoController {
         return "Aluno Home";
     }
 
+    
     @PostMapping
     public ResponseEntity<Object> saveAluno(@RequestBody @Valid AlunoDTO alunoDto){
+
+        if(alunoService.existsByCpf(alunoDto.getCpf())){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflito: Este CPF já está cadastrado na base de dados.");
+        }
+
+        if(alunoService.existsByNome(alunoDto.getNome())){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflito: Este nome já está cadastrado na base de dados.");
+        }
+
         var aluno = new Aluno();
         BeanUtils.copyProperties(alunoDto, aluno);
         aluno.setMensalidade(alunoDto.getMensalidadeStr());

@@ -7,5 +7,9 @@ import com.haterteam.sistemacobranca.model.Aluno;
 
 @Repository
 public interface AlunoRepository extends JpaRepository<Aluno, String>{
-    
+
+    boolean existsByCpf(String cpf);
+
+    boolean existsByNome(String nome);
+
 }
