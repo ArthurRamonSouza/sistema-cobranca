@@ -1,5 +1,7 @@
 package com.haterteam.sistemacobranca.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.haterteam.sistemacobranca.model.Aluno;
@@ -27,6 +29,10 @@ public class AlunoService {
 
     public boolean existsByNome(String nome) {
         return alunoRepository.existsByNome(nome);
+    }
+
+    public List<Aluno> findAll() {
+        return alunoRepository.findAll();
     }
     
 }
