@@ -1,10 +1,13 @@
 package com.haterteam.sistemacobranca.controller;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -53,8 +56,8 @@ public class AlunoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Aluno>> getAllAlunos(){
-        return ResponseEntity.status(HttpStatus.OK).body(alunoService.findAll());
+    public ResponseEntity<Page<Aluno>> getAllAlunos(@PageableDefault(page = 0, size = 30, sort = "nome", direction = Sort.Direction.ASC) Pageable pageable){
+        return ResponseEntity.status(HttpStatus.OK).body(alunoService.findAll(pageable));
     }
 
     @GetMapping("/{id}")

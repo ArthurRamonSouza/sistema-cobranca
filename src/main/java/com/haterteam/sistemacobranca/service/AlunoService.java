@@ -1,9 +1,10 @@
 package com.haterteam.sistemacobranca.service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.haterteam.sistemacobranca.model.Aluno;
@@ -33,8 +34,8 @@ public class AlunoService {
         return alunoRepository.existsByNome(nome);
     }
 
-    public List<Aluno> findAll() {
-        return alunoRepository.findAll();
+    public Page<Aluno> findAll(Pageable pageable) {
+        return alunoRepository.findAll(pageable);
     }
 
     public Optional<Aluno> findById(UUID id) {
