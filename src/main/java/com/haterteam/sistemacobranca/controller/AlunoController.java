@@ -1,5 +1,6 @@
 package com.haterteam.sistemacobranca.controller;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -69,6 +71,17 @@ public class AlunoController {
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(alunoOptional.get());
+    }
+
+    @GetMapping("/buscar/{termo}")
+    public ResponseEntity<Object> getAlunoByNome(@PathVariable(value = "termo") String termo){
+        Optional<List<Aluno>> alunosOptional = alunoService.findByNomeStartsWith(termo);
+
+        if(alunosOptional.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhum cadastro encontrado a partir desta busca.");
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(alunosOptional);
     }
 
     @PutMapping("/{id}")

@@ -1,5 +1,6 @@
 package com.haterteam.sistemacobranca.service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -48,6 +49,10 @@ public class AlunoService {
 
     public Optional<Aluno> findByNome(String nome) {
         return alunoRepository.findByNome(nome);
+    }
+
+    public Optional<List<Aluno>> findByNomeStartsWith(String termo) {
+        return alunoRepository.findByNomeStartsWith(termo);
     }
     
 }
