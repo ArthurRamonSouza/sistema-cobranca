@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.haterteam.sistemacobranca.dto.AlunoDTO;
@@ -72,9 +74,21 @@ public class AlunoController {
         return ResponseEntity.status(HttpStatus.OK).body(alunoOptional.get());
     }
 
-    @GetMapping("/buscar/{termo}")
-    public ResponseEntity<Object> getAlunoByNome(@PathVariable(value = "termo") String termo){
+    @GetMapping("/buscar/nome")
+    public ResponseEntity<Object> getAlunosByNome(@RequestParam String termo){
         Optional<List<Aluno>> alunosOptional = alunoService.findByNomeStartsWith(termo);
+
+        if(alunosOptional.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhum cadastro encontrado a partir desta busca.");
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(alunosOptional);
+    }
+
+    @GetMapping("/buscar/sexo")
+    public ResponseEntity<Object> getAlunosBySexo(@RequestParam String sexo){
+        sexo = sexo.toUpperCase();
+        Optional<List<Aluno>> alunosOptional = alunoService.findAllBySexo(sexo);
 
         if(alunosOptional.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhum cadastro encontrado a partir desta busca.");
@@ -118,5 +132,4 @@ public class AlunoController {
 
         return ResponseEntity.status(HttpStatus.OK).body("Aluno excluído da base de dados.");
     }
-
 }

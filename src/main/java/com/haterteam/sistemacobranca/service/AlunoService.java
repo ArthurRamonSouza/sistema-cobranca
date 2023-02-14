@@ -54,5 +54,9 @@ public class AlunoService {
     public Optional<List<Aluno>> findByNomeStartsWith(String termo) {
         return alunoRepository.findByNomeStartsWith(termo);
     }
+
+    public Optional<List<Aluno>> findAllBySexo(String sexo) {
+        return alunoRepository.findAllBySexo(sexo);
+    }
     
 }

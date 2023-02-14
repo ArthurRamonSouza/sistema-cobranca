@@ -24,4 +24,6 @@ public interface AlunoRepository extends JpaRepository<Aluno, UUID>{
     //@Query("SELECT nome FROM alunos WHERE nome LIKE :termo%")
     Optional<List<Aluno>> findByNomeStartsWith(String termo);
 
+    Optional<List<Aluno>> findAllBySexo(String sexo);
+
 }
