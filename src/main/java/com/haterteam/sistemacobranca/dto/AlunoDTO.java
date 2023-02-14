@@ -3,7 +3,6 @@ package com.haterteam.sistemacobranca.dto;
 import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.haterteam.sistemacobranca.model.Sexo;
 
 import io.micrometer.common.lang.Nullable;
 import jakarta.validation.constraints.NotBlank;

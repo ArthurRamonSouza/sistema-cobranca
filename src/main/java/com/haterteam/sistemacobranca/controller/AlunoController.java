@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.haterteam.sistemacobranca.dto.AlunoDTO;
@@ -30,8 +29,8 @@ import com.haterteam.sistemacobranca.service.AlunoService;
 import jakarta.validation.Valid;
 
 @RestController
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/aluno")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class AlunoController {
 
     final AlunoService alunoService;
@@ -67,7 +66,7 @@ public class AlunoController {
     public ResponseEntity<Object> getAluno(@PathVariable(value = "id") UUID id){
         Optional<Aluno> alunoOptional = alunoService.findById(id);
 
-        if(!alunoOptional.isPresent()){
+        if(alunoOptional.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Aluno não cadastrado na base de dados.");
         }
 
@@ -101,11 +100,13 @@ public class AlunoController {
     public ResponseEntity<Object> updateAluno(@PathVariable(value = "id") UUID id, @RequestBody @Valid AlunoDTO alunoDto){
         Optional<Aluno> alunoOptional = alunoService.findById(id);
 
-        if(!alunoOptional.isPresent()){
+        if(alunoOptional.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Aluno não cadastrado na base de dados.");
         }
 
-        var aluno = new Aluno();
+        var aluno = alunoOptional.get();
+        BeanUtils.copyProperties(alunoDto, aluno);
+        aluno.setId(alunoOptional.get().getId());
         
         alunoOptional = alunoService.findByCpf(alunoDto.getCpf());
         if(alunoOptional.isPresent() && alunoOptional.get().getNome() != aluno.getNome()){
@@ -117,8 +118,6 @@ public class AlunoController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflito: Nome do aluno já está presente na base de dados.");
         }
         
-        BeanUtils.copyProperties(alunoDto, aluno);
-        aluno.setId(alunoOptional.get().getId());
         return ResponseEntity.status(HttpStatus.OK).body(alunoService.save(aluno));
     }
 
@@ -126,10 +125,11 @@ public class AlunoController {
     public ResponseEntity<Object> deleteAluno(@PathVariable(value = "id") UUID id){
         Optional<Aluno> alunoOptional = alunoService.findById(id);
 
-        if(!alunoOptional.isPresent()){
+        if(alunoOptional.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Aluno não cadastrado na base de dados.");
         }
 
+        alunoService.deleteById(id);
         return ResponseEntity.status(HttpStatus.OK).body("Aluno excluído da base de dados.");
     }
 }

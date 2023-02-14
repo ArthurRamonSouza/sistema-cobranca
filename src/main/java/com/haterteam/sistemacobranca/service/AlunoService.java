@@ -58,5 +58,10 @@ public class AlunoService {
     public Optional<List<Aluno>> findAllBySexo(String sexo) {
         return alunoRepository.findAllBySexo(sexo);
     }
-    
+
+    @Transactional
+    public void deleteById(UUID id) {
+        alunoRepository.deleteById(id);
+    }
+
 }
