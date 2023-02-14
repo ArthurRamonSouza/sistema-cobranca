@@ -8,7 +8,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.query.Param;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -92,27 +91,20 @@ public class AlunoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Aluno não cadastrado na base de dados.");
         }
 
-        var aluno = alunoOptional.get();
-
+        var aluno = new Aluno();
+        
         alunoOptional = alunoService.findByCpf(alunoDto.getCpf());
         if(alunoOptional.isPresent() && alunoOptional.get().getNome() != aluno.getNome()){
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflito: CPF está associado a outro aluno.");
         }
-        aluno.setCpf(alunoDto.getCpf());
-
+        
         alunoOptional = alunoService.findByNome(alunoDto.getNome());
         if(alunoOptional.isPresent() && alunoOptional.get().getNome() != aluno.getNome()){
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflito: Nome do aluno já está presente na base de dados.");
         }
-        aluno.setNome(alunoDto.getNome());
-
-        aluno.setIdade(alunoDto.getIdade());
-        aluno.setEmail(alunoDto.getEmail());
-        aluno.setCelular(alunoDto.getCelular());
-        aluno.setCep(alunoDto.getCep());
-        aluno.setMensalidade(alunoDto.getMensalidade());
-        aluno.setDataPagamento(alunoDto.getDataPagamento());
-        aluno.setUltimoPagamento(alunoDto.getUltimoPagamento());
+        
+        BeanUtils.copyProperties(alunoDto, aluno);
+        aluno.setId(alunoOptional.get().getId());
         return ResponseEntity.status(HttpStatus.OK).body(alunoService.save(aluno));
     }
 

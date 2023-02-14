@@ -29,12 +29,13 @@ public class Aluno implements Serializable{
     @Column(nullable = false)
     private int idade;
     @Column(nullable = false)
+    private Sexo sexo;
+    @Column(nullable = false)
     private String email;
     @Column(nullable = false, length = 11)
     private String celular;
     @Column(nullable = false, length = 8)
     private String cep;
-
     @Column(nullable = false)
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate dataPagamento;
@@ -45,6 +46,9 @@ public class Aluno implements Serializable{
     
     public UUID getId() {
         return id;
+    }
+    public void setId(UUID id) {
+        this.id = id;
     }
     public void setUltimoPagamento(LocalDate ultimoPagamento) {
         this.ultimoPagamento = ultimoPagamento;
