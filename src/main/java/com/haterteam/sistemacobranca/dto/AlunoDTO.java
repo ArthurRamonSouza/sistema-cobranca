@@ -21,7 +21,7 @@ public class AlunoDTO {
     @Nullable
     private String email;
     @Nullable
-    private Sexo sexo;
+    private String sexo;
     @NotBlank
     @Size(max = 11)
     private String celular;
@@ -59,10 +59,10 @@ public class AlunoDTO {
     public void setEmail(String email) {
         this.email = email;
     }
-    public void setSexo(Sexo sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
-    public Sexo getSexo() {
+    public String getSexo() {
         return sexo;
     }
     public String getCelular() {
